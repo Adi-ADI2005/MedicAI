@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MedicAI</title>
+    <link rel="webside icon" type="png" href="static/logo.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* Background image */
+        body {
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Transparent navbar */
+        .navbar {
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        /* Logo */
+        .myimg {
+            width: 70px;
+            height: 70px;
+            border: 2px solid white;
+            border-radius: 35px;
+        }
+
+        /* Transparent form container */
+        .form-box {
+            background: rgba(0, 0, 0, 0); /* fully transparent */
+            border-radius: 15px;
+            padding: 40px;
+            color: white;
+        }
+
+        /* Transcription box */
+        #transcription {
+            margin-top: 8px;
+            padding: 10px;
+            border: 1px dashed white;
+            border-radius: 8px;
+            min-height: 40px;
+            color: white;
+            background: rgba(0,0,0,0.3);
+        }
+
+        /* Input hover effect */
+        .input-group-text:hover {
+            background: #e0e0e0;
+        }
+
+        /* Small green button */
+        .btn-small-green {
+            padding: 8px 18px;
+            font-size: 16px;
+            background: #28a745 !important;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Transparent Navbar -->
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                <img class="myimg" src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+                <h1 class="text-white ms-3 mb-0">MedicAI</h1>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="mt-4 my-4 text-center text-success">MedicAI</h1>
+
+    <!-- Transparent form area -->
+    <div class="container my-4 mt-4 form-box">
+        <form action="/predict" method="post">
+            <div class="form-group position-relative">
+                <label for="symptoms">Enter Symptoms (comma separated):</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="symptoms" name="symptoms" placeholder="e.g., itching, headache">
+                    <span class="input-group-text" id="mic-button" style="cursor:pointer; background:white;">
+                        <i class="bi bi-mic-fill" style="color:black;"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div id="transcription"></div>
+            <br>
+
+            <button type="submit" class="btn-small-green w-100">Predict</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
